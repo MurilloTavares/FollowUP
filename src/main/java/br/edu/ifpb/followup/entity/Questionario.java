@@ -11,9 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
-public class QuestoesList implements Serializable {
+public class Questionario implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,19 +22,22 @@ public class QuestoesList implements Serializable {
     
     @ManyToMany
     @JoinTable(
-            name = "Questao_QuestoesList",
-            joinColumns = @JoinColumn(name = "questoes_list"),
+            name = "questionario_questao",
+            joinColumns = @JoinColumn(name = "questionario"),
             inverseJoinColumns = @JoinColumn(name = "questao") 
     )
     private List<Questao> questoes;
     
     @Enumerated(EnumType.STRING)
     private TipoQuestao tipo;
-
-    public QuestoesList() {
+    
+    @OneToMany(mappedBy = "questionario")
+    private List<QuestionarioAluno> questionariosDeAlunos;
+    
+    public Questionario() {
     }
 
-    public QuestoesList(List<Questao> questoes, TipoQuestao tipo) {
+    public Questionario(List<Questao> questoes, TipoQuestao tipo) {
         this.questoes = questoes;
         this.tipo = tipo;
     }
@@ -61,5 +65,13 @@ public class QuestoesList implements Serializable {
     public void setTipo(TipoQuestao tipo) {
         this.tipo = tipo;
     }
-    
+
+    public List<QuestionarioAluno> getQuestionariosDeAlunos() {
+        return questionariosDeAlunos;
+    }
+
+    public void setQuestionariosDeAlunos(List<QuestionarioAluno> questionariosDeAlunos) {
+        this.questionariosDeAlunos = questionariosDeAlunos;
+    }
+
 }
