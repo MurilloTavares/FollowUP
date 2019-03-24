@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h3>Cadastrar</h3>
+        <h:outputText id="info" binding="#{authController.infoComponent}"/>
+        <h:message for="info"/>
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputLabel for="nome" value="Nome"/>
+                <h:inputText id="nome"
+                             value="#{authController.nome}"
+                             required="true" requiredMessage="Informe o nome"
+                             maxlength="30" validator="validator.nome">
+                </h:inputText>
+                <h:message for="nome" />
+
+                <h:outputLabel for="email" value="Email"/>
+                <h:inputText id="email"
+                             value="#{authController.email}"
+                             required="true" requiredMessage="Informe o email"
+                             validator="#{emailExistsValidator.validate}" >
+                    <f:validator validatorId="validator.email" />
+                </h:inputText>
+                
+                <h:message for="email" />
+
+                <h:outputLabel for="senha" value="Senha"/>
+                <h:inputSecret id="senha"
+                               value="#{authController.senha}"
+                               required="true" requiredMessage="Informe a senha">
+                    <f:validator validatorId="validator.confirmarSenha" />
+                    <f:attribute name="confSenha" value="#{confSenha}" />
+                </h:inputSecret>
+                <h:message for="senha" />
+                
+                <h:outputLabel for="confSenha" value="Confirmar Senha"/>
+                <h:inputSecret id="confSenha"
+                             binding="#{confSenha}"
+                             required="true" requiredMessage="Confirme a senha" />
+                <h:message for="confSenha" />
+            </h:panelGrid>
+            
+            <h:selectOneRadio value="#{authController.tipo}">
+                <f:selectItem itemValue="aluno" itemLabel="Aluno"/>
+                <f:selectItem itemValue="professor" itemLabel="Professor" />
+            </h:selectOneRadio>
+            
+            <h:commandButton value="cadastrar" action="#{authController.cadastrar()}"/>
+            <h:link value="logar" outcome="login" />
+        </h:form>
+    </h:body>
+</html>
