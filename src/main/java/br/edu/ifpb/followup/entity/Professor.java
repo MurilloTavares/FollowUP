@@ -2,19 +2,23 @@ package br.edu.ifpb.followup.entity;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Professor extends Usuario{
-
-    @OneToMany
+public class Professor extends Usuario {
+    
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "professor")
     private List<Questao> questoes;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "professor")
-    private List<Questionario> questionarios;
+    private List<ListaDeQuestao> listasDeQuestao;
+
+    public Professor() {
+    }
 
     public List<Questao> getQuestoes() {
         return questoes;
@@ -24,12 +28,12 @@ public class Professor extends Usuario{
         this.questoes = questoes;
     }
 
-    public List<Questionario> getQuestionarios() {
-        return questionarios;
+    public List<ListaDeQuestao> getListasDeQuestao() {
+        return listasDeQuestao;
     }
 
-    public void setQuestionarios(List<Questionario> questionarios) {
-        this.questionarios = questionarios;
+    public void setListasDeQuestao(List<ListaDeQuestao> listasDeQuestao) {
+        this.listasDeQuestao = listasDeQuestao;
     }
-    
+        
 }

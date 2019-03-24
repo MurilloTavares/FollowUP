@@ -1,10 +1,15 @@
 package br.edu.ifpb.followup.entity;
 
 import java.io.Serializable;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo")
 public abstract class Usuario implements Serializable{
 
     @Id
@@ -14,7 +19,7 @@ public abstract class Usuario implements Serializable{
 
     public Usuario() {
     }
-
+    
     public String getEmail() {
         return email;
     }

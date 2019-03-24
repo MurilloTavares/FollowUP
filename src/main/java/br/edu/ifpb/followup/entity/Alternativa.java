@@ -2,28 +2,21 @@ package br.edu.ifpb.followup.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-public class Alternativa implements Serializable {
+class Alternativa implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
     @Lob
     private String texto;
-    private boolean correta = false;
+    
+    private boolean correta;
 
     public Alternativa() {
-    }
-
-    public Alternativa(String texto, boolean correta) {
-        this.texto = texto;
-        this.correta = correta;
     }
 
     public int getId() {

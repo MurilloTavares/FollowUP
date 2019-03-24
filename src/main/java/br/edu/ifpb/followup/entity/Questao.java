@@ -1,29 +1,25 @@
 package br.edu.ifpb.followup.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Questao implements Serializable {
+class Questao implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "questao")
-    private List<Alternativa> alternativas = new ArrayList<>();
+    private List<Alternativa> alternativas;
     
     @Lob
     private String enunciado;
@@ -32,11 +28,6 @@ public class Questao implements Serializable {
     private TipoQuestao tipo;
 
     public Questao() {
-    }
-
-    public Questao(List<Alternativa> alternativas, String enunciado) {
-        this.alternativas = alternativas;
-        this.enunciado = enunciado;
     }
 
     public int getId() {
@@ -71,12 +62,4 @@ public class Questao implements Serializable {
         this.tipo = tipo;
     }
     
-    public void addAlternativa(Alternativa alternativa) {
-        this.alternativas.add(alternativa);
-    }
-    
-    public void removerAlternativa(Alternativa alternativa){
-        this.alternativas.remove(alternativa);
-    }
-        
 }
