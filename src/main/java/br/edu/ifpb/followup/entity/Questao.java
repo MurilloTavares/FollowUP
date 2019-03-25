@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -16,9 +18,10 @@ import javax.persistence.OneToMany;
 public class Questao implements Serializable {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "questao")
     private List<Alternativa> alternativas;
     
@@ -47,6 +50,14 @@ public class Questao implements Serializable {
     public void setAlternativas(List<Alternativa> alternativas) {
         this.alternativas = alternativas;
     }
+    
+    public void addAlternativa(Alternativa alt){
+        this.alternativas.add(alt);
+    }
+    
+    public void removerAlternativa(Alternativa alt){
+        this.alternativas.remove(alt);
+    }
 
     public String getEnunciado() {
         return enunciado;
@@ -62,6 +73,11 @@ public class Questao implements Serializable {
 
     public void setTipo(TipoQuestao tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Questao{" + "id=" + id + ", alternativas=" + alternativas + ", enunciado=" + enunciado + ", tipo=" + tipo + '}';
     }
     
 }

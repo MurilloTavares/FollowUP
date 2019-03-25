@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputText value="Questão:" />
+                <h:inputText value="#{questaoController.questao.enunciado}" />
+                
+                <h:selectOneMenu value="#{questaoController.questao.tipo}" >
+                    <f:selectItems value="#{questaoController.tipos}" var="tipo"
+                                   itemValue="#{tipo}" itemLabel="#{tipo.label}"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+            
+            
+
+            <h:dataTable value="#{questaoController.getAlternativas()}" var="alt">
+                <h:column>
+                    <h:selectBooleanCheckbox value="#{alt.correta}" />
+                </h:column>
+                <h:column>
+                    <h:inputText value="#{alt.texto}" />
+                </h:column>
+                <h:column>
+                    <h:commandButton value="X"
+                                     action="#{questaoController.removerAlternativa(alt)}" />
+                </h:column>
+            </h:dataTable>  
+
+            <h:panelGrid columns="2">
+                <h:commandButton value="salvar"
+                                 action="#{professorService.addQuestao(
+                                              questaoController.questao
+                                           )}" />
+                <h:commandButton value="+" action="#{questaoController.novaAlternativa()}" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

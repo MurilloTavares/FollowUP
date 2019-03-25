@@ -16,7 +16,7 @@ public class UsuarioDAO {
     }
     
     public Usuario autenticar(String email, String senha){
-        Usuario user = find(email);
+        Usuario user = em.find(Usuario.class, email);
         if(user == null || !user.getSenha().equals(senha)){
             return null;
         } else {

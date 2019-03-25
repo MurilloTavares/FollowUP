@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <form action="criarQuestao.xhtml">
+            <input type="submit" value="Criar Questao" />
+        </form>
+        
+        <!-- Listando questoes cadastradas -->
+        <h:form>  
+            <h:dataTable value="#{professorService.questoes()}" var="q">
+                <h:column>
+                    <h:commandButton value="X" action="#{professorService.remover(q)}" />
+                </h:column>
+                
+                <h:column>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Questão:" />
+                        <h:outputText value="#{q.enunciado}" />
+                        
+                        <h:outputText value="Tipo:" />
+                        <h:outputText value="#{q.tipo.label}" />
+
+                        <h:outputText value="Alternativas:" />
+                        <ui:repeat value="#{q.alternativas}" var="alt">
+                            <h:panelGrid columns="2">
+                                <h:selectBooleanCheckbox value="#{alt.correta}" disabled="true"/>
+                                <h:outputText value="#{alt.texto}" />
+                            </h:panelGrid>
+                        </ui:repeat>
+                    </h:panelGrid>
+                </h:column>
+
+            </h:dataTable>
+
+        </h:form>
+    </h:body>
+</html>
