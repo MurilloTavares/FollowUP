@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-class Alternativa implements Serializable{
+public class Alternativa implements Serializable{
     
     @Id
     private int id;

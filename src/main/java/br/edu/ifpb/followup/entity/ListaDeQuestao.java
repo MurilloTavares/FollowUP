@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-class ListaDeQuestao implements Serializable{
+public class ListaDeQuestao implements Serializable{
     
     @Id
     private int id;

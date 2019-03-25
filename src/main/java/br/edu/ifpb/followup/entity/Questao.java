@@ -1,6 +1,7 @@
 package br.edu.ifpb.followup.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,7 +13,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 @Entity
-class Questao implements Serializable {
+public class Questao implements Serializable {
     
     @Id
     private int id;
@@ -28,6 +29,7 @@ class Questao implements Serializable {
     private TipoQuestao tipo;
 
     public Questao() {
+        alternativas = new ArrayList<>();
     }
 
     public int getId() {
