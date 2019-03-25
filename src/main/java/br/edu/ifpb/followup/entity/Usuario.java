@@ -1,6 +1,7 @@
 package br.edu.ifpb.followup.entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +17,9 @@ public abstract class Usuario implements Serializable{
     private String email;
     private String senha;
     private String nome;
+    
+    @Column(name = "tipo", insertable = false, updatable = false)
+    private String tipo;
 
     public Usuario() {
     }
@@ -42,6 +46,14 @@ public abstract class Usuario implements Serializable{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
 }

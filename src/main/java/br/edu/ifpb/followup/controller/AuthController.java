@@ -15,20 +15,20 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class AuthController {
-    
+
     @EJB
     private UsuarioDAO dao;
-    
+
     private UsuarioBuilder builder;
-    
+
     private String email;
     private String senha;
     private String nome;
     private String tipo = "aluno";
-    
+
     private UIComponent infoComponent;
     private UIComponent errorComponent;
-    
+
     public String cadastrar() {
         builder = getTipoBuilder();
         Usuario user = builder
@@ -40,36 +40,49 @@ public class AuthController {
         msgSucesso("Cadastro realizado com sucesso");
         return null;
     }
-    
-    public String autenticar(){
+
+    public String autenticar() {
         Usuario user = dao.autenticar(email, senha);
-        if(user == null){
+        if (user == null) {
             msgErro("Email ou senha inválida");
+            return null;
         }
-        return null;
+        String type = user.getTipo();
+        type = type.toLowerCase();
+        SessionJSF.setParam(type, user); // ("aluno", aluno) ou ("professor", professor)
+        SessionJSF.setParam("user", user); // usado para identificar se existe usuario logado
+        
+        String path = type;
+        return path+"/home.xhtml?faces-redirect=true";
     }
-    
+
     private void msgSucesso(String txt) {
-        if(infoComponent == null) return;
+        if (infoComponent == null) {
+            return;
+        }
         FacesMessage msg = new FacesMessage(txt);
         msg.setSeverity(FacesMessage.SEVERITY_INFO);
         FacesContext.getCurrentInstance()
                 .addMessage(infoComponent.getClientId(), msg);
     }
-    
+
     private void msgErro(String txt) {
-        if(errorComponent == null) return;
+        if (errorComponent == null) {
+            return;
+        }
         FacesMessage msg = new FacesMessage(txt);
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
         FacesContext.getCurrentInstance()
                 .addMessage(errorComponent.getClientId(), msg);
     }
 
-    private UsuarioBuilder getTipoBuilder(){
-        if(tipo.equals("aluno")) return new AlunoBuilder();
+    private UsuarioBuilder getTipoBuilder() {
+        if (tipo.equals("aluno")) {
+            return new AlunoBuilder();
+        }
         return new ProfessorBuilder();
     }
-    
+
     // --- Getters e Setters ---
     public String getEmail() {
         return email;
@@ -118,5 +131,5 @@ public class AuthController {
     public void setErrorComponent(UIComponent errorComponent) {
         this.errorComponent = errorComponent;
     }
-    
+
 }
