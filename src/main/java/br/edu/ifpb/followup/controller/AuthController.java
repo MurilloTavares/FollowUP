@@ -29,18 +29,6 @@ public class AuthController {
     private UIComponent infoComponent;
     private UIComponent errorComponent;
 
-    public String cadastrar() {
-        builder = getTipoBuilder();
-        Usuario user = builder
-                .setEmail(email)
-                .setNome(nome)
-                .setSenha(senha)
-                .build();
-        dao.cadastrar(user);
-        msgSucesso("Cadastro realizado com sucesso");
-        return null;
-    }
-
     public String autenticar() {
         Usuario user = dao.autenticar(email, senha);
         if (user == null) {
