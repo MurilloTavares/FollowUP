@@ -14,8 +14,7 @@ public class Professor extends Usuario {
     @JoinColumn(name = "professor")
     private List<Questao> questoes;
     
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "professor")
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "professor")
     private List<ListaDeQuestao> listasDeQuestao;
 
     public Professor() {

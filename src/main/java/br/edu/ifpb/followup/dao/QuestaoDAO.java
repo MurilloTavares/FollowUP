@@ -1,5 +1,6 @@
 package br.edu.ifpb.followup.dao;
 
+import br.edu.ifpb.followup.entity.Professor;
 import br.edu.ifpb.followup.entity.Questao;
 import br.edu.ifpb.followup.entity.TipoQuestao;
 import java.util.List;
@@ -9,9 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 @Stateless
 public class QuestaoDAO {
@@ -33,24 +31,24 @@ public class QuestaoDAO {
         Questao q = em.find(Questao.class, questao.getId());
         em.remove(q);
     }
-
-//    public List<Questao> questoes() {
-//        CriteriaQuery<Questao> queryBuilder = builder.createQuery(Questao.class);
-//        queryBuilder.select(queryBuilder.from(Questao.class));
-//        
-//        TypedQuery<Questao> query = em.createQuery(queryBuilder);
-//        return query.getResultList();
-//    }
     
-//    public List<Questao> questoesOf(TipoQuestao tipo){
-//        CriteriaQuery<Questao> queryBuilder = builder.createQuery(Questao.class);
-//        
-//        Root<Questao> root = queryBuilder.from(Questao.class);
-//        Predicate equal = builder.equal(root.get("tipo"), tipo);
-//        queryBuilder.select(root).where(equal);
-//        
-//        TypedQuery<Questao> query = em.createQuery(queryBuilder);
-//        return query.getResultList();
-//    }
+    public List<Questao> questoesOf(Professor p){
+        String sql = "SELECT q FROM Professor p, IN(p.questoes) q "
+                   + "WHERE p.email = :email" ;
+        
+        TypedQuery<Questao> query = em.createQuery(sql, Questao.class);
+        query.setParameter("email", p.getEmail());
+        return query.getResultList();
+    }
+    
+    public List<Questao> questoesOf(Professor p, TipoQuestao tipo){
+        String sql = "SELECT q FROM Professor p, IN(p.questoes) q "
+                   + "WHERE p.email = :email and q.tipo = :tipo";
+        
+        TypedQuery<Questao> query = em.createQuery(sql, Questao.class);
+        query.setParameter("email", p.getEmail());
+        query.setParameter("tipo", tipo);
+        return query.getResultList();
+    }
     
 }

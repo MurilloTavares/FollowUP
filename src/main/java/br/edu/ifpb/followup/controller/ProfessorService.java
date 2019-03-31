@@ -2,6 +2,7 @@ package br.edu.ifpb.followup.controller;
 
 import br.edu.ifpb.followup.entity.Professor;
 import br.edu.ifpb.followup.dao.ProfessorDAO;
+import br.edu.ifpb.followup.entity.ListaDeQuestao;
 import br.edu.ifpb.followup.entity.Questao;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -15,7 +16,6 @@ public class ProfessorService {
     
     @EJB
     private ProfessorDAO pDao;
-    
     private Professor sessionProf;
     
     @PostConstruct
@@ -26,18 +26,15 @@ public class ProfessorService {
     public void addQuestao(Questao q){
         sessionProf.getQuestoes().add(q);
         pDao.atualizar(sessionProf);
-        // SessionJSF.setParam("professor", sessionProf);
-        // return "questoes.xhtml?faces-redirect=true";
     }
     
     public void remover(Questao q){
         sessionProf.removerQuestao(q);
         pDao.atualizar(sessionProf);
-        // SessionJSF.setParam("professor", sessionProf);
     }
     
     public List<Questao> questoes(){
         return sessionProf.getQuestoes() ;
     }
-    
+            
 }

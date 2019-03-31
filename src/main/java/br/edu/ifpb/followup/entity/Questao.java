@@ -3,6 +3,7 @@ package br.edu.ifpb.followup.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -72,9 +73,45 @@ public class Questao implements Serializable {
     }
 
     public void setTipo(TipoQuestao tipo) {
-        this.tipo = tipo;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + this.id;
+        hash = 37 * hash + Objects.hashCode(this.alternativas);
+        hash = 37 * hash + Objects.hashCode(this.enunciado);
+        hash = 37 * hash + Objects.hashCode(this.tipo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Questao other = (Questao) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.enunciado, other.enunciado)) {
+            return false;
+        }
+        if (!Objects.equals(this.alternativas, other.alternativas)) {
+            return false;
+        }
+        if (this.tipo != other.tipo) {
+            return false;
+        }
+        return true;
+    }
+    
     @Override
     public String toString() {
         return "Questao{" + "id=" + id + ", alternativas=" + alternativas + ", enunciado=" + enunciado + ", tipo=" + tipo + '}';

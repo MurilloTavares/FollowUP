@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <form action="criarQuestionario.xhtml">
+            <input type="submit" value="Criar Questionario" />
+        </form>
+        <h:dataTable value="#{questionarioController.listar()}" var="questionario" >
+            <h:column>
+                <f:facet name="header">Titulo</f:facet>
+                #{questionario.titulo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Questoes</f:facet>
+                #{questionario.questoes.size()}
+            </h:column>
+        </h:dataTable>
+    </body>
+</html>
