@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+<ui:composition  template="../template/professor.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="content">
         <h3>PROFESSOR HOMEPAGE</h3>
         <form action="questoes.xhtml">
             <input type="submit" value="Ver Questões" />
@@ -14,5 +12,5 @@
         <form action="questionarios.xhtml">
             <input type="submit" value="Ver Questionarios" />
         </form>
-    </body>
-</html>
+    </ui:define>
+</ui:composition>

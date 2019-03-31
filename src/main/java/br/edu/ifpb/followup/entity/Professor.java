@@ -6,9 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Professor extends Usuario {
+    
+    @Transient
+    private final UserType TYPE = UserType.PROFESSOR;
     
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "professor")
@@ -20,6 +24,11 @@ public class Professor extends Usuario {
     public Professor() {
         questoes = new ArrayList<>();
         listasDeQuestao = new ArrayList<>();
+    }
+    
+    @Override
+    public UserType getUserType() {
+        return TYPE;
     }
     
     public void addQuestao(Questao q){

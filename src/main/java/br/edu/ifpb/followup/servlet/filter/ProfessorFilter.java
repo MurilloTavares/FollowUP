@@ -1,6 +1,8 @@
 package br.edu.ifpb.followup.servlet.filter;
 
 import br.edu.ifpb.followup.entity.Professor;
+import br.edu.ifpb.followup.entity.UserType;
+import br.edu.ifpb.followup.entity.Usuario;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -20,12 +22,12 @@ public class ProfessorFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         
-        Professor prof = (Professor) req.getSession().getAttribute("professor");
+        Usuario user = (Usuario) req.getSession().getAttribute("user");
         
-        if(prof != null) {
+        if(user != null && user.getUserType() == UserType.PROFESSOR) {
             chain.doFilter(request, response);
         } else {
-            resp.sendRedirect(req.getContextPath()+"/login.xhtml");
+            resp.sendRedirect("../user/login.xhtml");
         }
     }
 

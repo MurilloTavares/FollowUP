@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @RequestScoped
-public class UsuarioService {
+public class CadastroService {
     
     @EJB
     private UsuarioDAO uDao;

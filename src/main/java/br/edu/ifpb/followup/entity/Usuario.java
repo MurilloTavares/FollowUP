@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -20,9 +21,11 @@ public abstract class Usuario implements Serializable{
     
     @Column(name = "tipo", insertable = false, updatable = false)
     private String tipo;
-
+    
     public Usuario() {
     }
+    
+    public abstract UserType getUserType();
     
     public String getEmail() {
         return email;

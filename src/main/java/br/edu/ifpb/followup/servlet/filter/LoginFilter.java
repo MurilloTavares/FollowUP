@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = {"/login.xhtml", "/cadastrar.xhtml"})
+@WebFilter(urlPatterns = {"/user/*"})
 public class LoginFilter implements Filter {
 
     @Override
@@ -24,9 +24,8 @@ public class LoginFilter implements Filter {
         if(user == null) {
             chain.doFilter(request, response);
         } else {
-            String path = user.getTipo();
-            path = path.toLowerCase();
-            resp.sendRedirect(path+"/home.xhtml");
+            String path = user.getUserType().getPATH();
+            resp.sendRedirect("../"+path+"/home.xhtml");
         }
     }
     
