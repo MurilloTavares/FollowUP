@@ -5,6 +5,7 @@ import br.edu.ifpb.followup.dao.ProfessorDAO;
 import br.edu.ifpb.followup.entity.ListaDeQuestao;
 import br.edu.ifpb.followup.entity.Questao;
 import br.edu.ifpb.followup.session.SessionJSF;
+import br.edu.ifpb.followup.session.UserSession;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -17,25 +18,15 @@ public class ProfessorService {
     
     @EJB
     private ProfessorDAO pDao;
-    private Professor sessionProf;
+    private Professor prof;
     
     @PostConstruct
     public void init() {
-        sessionProf = (Professor) SessionJSF.getParam("professor");
-    }
-    
-    public void addQuestao(Questao q){
-        sessionProf.getQuestoes().add(q);
-        pDao.atualizar(sessionProf);
-    }
-    
-    public void remover(Questao q){
-        sessionProf.removerQuestao(q);
-        pDao.atualizar(sessionProf);
+        prof = (Professor) UserSession.getUser();
     }
     
     public List<Questao> questoes(){
-        return sessionProf.getQuestoes() ;
+        return pDao.questoes(prof);
     }
             
 }
