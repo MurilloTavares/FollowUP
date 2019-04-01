@@ -6,6 +6,7 @@ import br.edu.ifpb.followup.entity.Professor;
 import javax.faces.bean.ManagedBean;
 import br.edu.ifpb.followup.entity.Questao;
 import br.edu.ifpb.followup.entity.TipoQuestao;
+import br.edu.ifpb.followup.session.SessionJSF;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;

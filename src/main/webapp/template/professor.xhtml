@@ -3,12 +3,27 @@
 <ui:composition template="base.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:b="http://bootsfaces.net/ui">
-    <ui:define name="navbarlinks">
-        <b:navbarLinks>
-            <b:navLink value="Home" href="#"></b:navLink>
-            <b:navLink value="Link" href="#"></b:navLink>
-            <b:navLink value="Link" href="#"></b:navLink>
-        </b:navbarLinks>
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:define name="navbar">
+        <b:navBar brand="FollowUP" fluid="true" id="main-navbar"
+                  sticky="true" position="top">
+
+            <b:navbarLinks>
+                <b:navLink value="Home" href="#" ></b:navLink>
+                <b:navLink value="Link" href="#"></b:navLink>
+                <b:navLink value="Link" href="#"></b:navLink>
+            </b:navbarLinks>
+
+            <h:form>
+                <b:navbarLinks pull="right">
+                    <b:dropMenu value="#{usuarioController.nome}">
+                        <b:navCommandLink value="Logout" action="#{authController.logout()}" />
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </h:form>
+        </b:navBar>
+
+
     </ui:define>
 </ui:composition>

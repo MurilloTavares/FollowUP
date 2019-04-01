@@ -4,6 +4,7 @@ import br.edu.ifpb.followup.entity.Professor;
 import br.edu.ifpb.followup.dao.ProfessorDAO;
 import br.edu.ifpb.followup.entity.ListaDeQuestao;
 import br.edu.ifpb.followup.entity.Questao;
+import br.edu.ifpb.followup.session.SessionJSF;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;

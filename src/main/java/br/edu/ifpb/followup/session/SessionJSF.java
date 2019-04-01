@@ -1,4 +1,4 @@
-package br.edu.ifpb.followup.controller;
+package br.edu.ifpb.followup.session;
 
 import java.io.Serializable;
 import javax.faces.context.FacesContext;

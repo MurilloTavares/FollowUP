@@ -2,6 +2,7 @@ package br.edu.ifpb.followup.controller;
 
 import br.edu.ifpb.followup.dao.UsuarioDAO;
 import br.edu.ifpb.followup.entity.Usuario;
+import br.edu.ifpb.followup.session.UserSession;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -32,6 +33,12 @@ public class AuthController {
         String path = user.getUserType().getPATH();
         path = "../"+path+"/home.xhtml?faces-redirect=true";
         FacesContext.getCurrentInstance().getExternalContext().redirect(path); 
+    }
+    
+    public void logout() throws IOException {
+        UserSession.invalidate();
+        String path = "../user/login.xhtml";
+        FacesContext.getCurrentInstance().getExternalContext().redirect(path);
     }
 
     private void msgErro(String msg) {
