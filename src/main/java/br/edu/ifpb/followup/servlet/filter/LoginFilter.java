@@ -25,7 +25,7 @@ public class LoginFilter implements Filter {
             chain.doFilter(request, response);
         } else {
             String path = user.getUserType().getPATH();
-            resp.sendRedirect("../"+path+"/home.xhtml");
+            resp.sendRedirect("/FollowUP/"+path+"/home.xhtml");
         }
     }
     

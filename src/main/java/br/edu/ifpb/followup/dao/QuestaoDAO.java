@@ -23,8 +23,10 @@ public class QuestaoDAO {
         builder = em.getCriteriaBuilder();
     }
     
-    public void salvar(Questao q){
-        em.persist(q);
+    public void salvar(Questao q, Professor p){
+        p = em.find(Professor.class, p.getEmail());
+        p.addQuestao(q);
+        em.merge(p);
     }
     
     public void remover(Questao questao){

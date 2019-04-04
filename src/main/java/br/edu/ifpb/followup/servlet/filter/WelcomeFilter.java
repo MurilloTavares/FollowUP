@@ -17,7 +17,7 @@ public class WelcomeFilter implements Filter{
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         
         HttpServletResponse resp = (HttpServletResponse) response;
-            resp.sendRedirect("login.xhtml");
+            resp.sendRedirect("/FollowUP/user/login.xhtml");
     }
 
     @Override

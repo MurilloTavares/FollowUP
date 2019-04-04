@@ -73,6 +73,7 @@ public class Questao implements Serializable {
     }
 
     public void setTipo(TipoQuestao tipo) {
+        this.tipo = tipo;
     }
 
     @Override

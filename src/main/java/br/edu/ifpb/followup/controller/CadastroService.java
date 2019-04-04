@@ -5,7 +5,6 @@ import br.edu.ifpb.followup.dao.UsuarioDAO;
 import br.edu.ifpb.followup.entity.Usuario;
 import br.edu.ifpb.followup.factory.UsuarioBuilderFactory;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
@@ -35,10 +34,7 @@ public class CadastroService {
         uDao.cadastrar(user);
         
         String msg = "Cadastro realizado com sucesso. :)";
-        if(info != null)
-            FacesContext.getCurrentInstance().addMessage(info.getClientId(),
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-        
+        MessagerJSF.msgInfo(FacesContext.getCurrentInstance(), info, msg);
         return null;
     }
     

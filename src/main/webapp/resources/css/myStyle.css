@@ -30,6 +30,10 @@ body {
     padding: 50px 0px 0px 0px;
 }
 
+.form-header {
+    margin-top: 0px;
+}
+
 .center-itens {
     display: flex;
     align-items: center;
@@ -52,6 +56,10 @@ body {
 
 .float-right {
     float: right;
+}
+
+table.vertical-center td{
+    vertical-align: top;
 }
 
 .bg-white{ background-color: white; }

@@ -5,7 +5,6 @@ import br.edu.ifpb.followup.entity.Usuario;
 import br.edu.ifpb.followup.session.UserSession;
 import java.io.IOException;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
@@ -26,9 +25,11 @@ public class AuthController {
     public void autenticar() throws IOException {
         Usuario user = dao.autenticar(email, senha);
         if (user == null) {
-            msgErro("Email ou senha inválida. :(");
+            String msg = "Email ou senha inválida. :(";
+            MessagerJSF.msgError(FacesContext.getCurrentInstance(), error, msg );
             return;
         }
+        
         UserSession.setUser(user);
         String path = user.getUserType().getPATH();
         path = "../"+path+"/home.xhtml?faces-redirect=true";
@@ -39,13 +40,6 @@ public class AuthController {
         UserSession.invalidate();
         String path = "../user/login.xhtml";
         FacesContext.getCurrentInstance().getExternalContext().redirect(path);
-    }
-
-    private void msgErro(String msg) {
-        if (error != null) {
-            FacesContext.getCurrentInstance().addMessage(error.getClientId(),
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null));
-        }
     }
 
     // --- Getters e Setters ---

@@ -26,7 +26,7 @@ public class AlunoFilter implements Filter {
         if(user != null && user.getUserType() == UserType.ALUNO) {
             chain.doFilter(request, response);
         } else {
-            resp.sendRedirect("../user/login.xhtml");
+            resp.sendRedirect("/FollowUP/user/login.xhtml");
         }
     }
 

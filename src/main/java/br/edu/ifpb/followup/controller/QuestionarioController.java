@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+// UTILIZADO EM PAG ANTIGA
 @ManagedBean
 @ViewScoped
 public class QuestionarioController {

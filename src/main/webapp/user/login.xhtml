@@ -6,13 +6,13 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:b="http://bootsfaces.net/ui">
     <ui:define name="content">
-        
+
         <b:container id="form-container" fluid="true" class="center bg-white">
-            
-            <b:row class="header">
-                <h3>Login</h3>
-            </b:row>
-            
+
+            <center>
+                <h3 class="form-header">Login</h3>
+            </center>
+
             <b:form>
                 <!-- email -->
                 <b:inputText label="Email: " value="#{authController.email}"
@@ -25,15 +25,15 @@
                              label="Senha: " value="#{authController.senha}"
                              required="true" requiredMessage="Informe a senha." />
                 <b:message for="senha" />
-                
+
                 <h:outputText id="error" binding="#{authController.error}" />
                 <b:message for="error"/>
-                                
+
                 <!-- buttons -->
                 <div style="padding-top: 10px;">
                     <span>Não possui uma conta?</span>
                     <b:commandLink value="Cadastrar." outcome="cadastrar.xhtml" />
-                    
+
                     <b:commandButton  value="Logar" look="success" style="float: right;"
                                       action="#{authController.autenticar()}" />
                 </div>

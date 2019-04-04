@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
 
+// UTILIZADO EM PAG ANTIGA
 @ManagedBean
 @ViewScoped
 public class QuestaoController implements Serializable{

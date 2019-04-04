@@ -2,6 +2,7 @@ package br.edu.ifpb.followup.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -14,11 +15,16 @@ public class Professor extends Usuario {
     @Transient
     private final UserType TYPE = UserType.PROFESSOR;
     
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     @JoinColumn(name = "professor")
     private List<Questao> questoes;
     
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "professor")
+    @OneToMany(mappedBy = "professor",
+            fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private List<ListaDeQuestao> listasDeQuestao;
 
     public Professor() {
