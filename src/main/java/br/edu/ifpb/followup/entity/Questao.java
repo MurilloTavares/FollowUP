@@ -35,6 +35,14 @@ public class Questao implements Serializable {
     public Questao() {
         alternativas = new ArrayList<>();
     }
+    
+    public int quantCorretas(){
+        int quant = 0;
+        for(Alternativa a : alternativas){
+            if(a.isCorreta()) quant++;
+        }
+        return quant;
+    }
 
     public int getId() {
         return id;
@@ -111,11 +119,6 @@ public class Questao implements Serializable {
             return false;
         }
         return true;
-    }
-    
-    @Override
-    public String toString() {
-        return "Questao{" + "id=" + id + ", alternativas=" + alternativas + ", enunciado=" + enunciado + ", tipo=" + tipo + '}';
     }
     
 }

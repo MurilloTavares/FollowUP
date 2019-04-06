@@ -25,6 +25,7 @@ public class CriarQuestaoController {
     private Alternativa correta;
     
     private UIComponent info;
+    private UIComponent error;
     
     @PostConstruct
     public void init() {
@@ -50,6 +51,12 @@ public class CriarQuestaoController {
         Professor prof = (Professor) UserSession.getUser();
         qDao.salvar(questao, prof);
         novaQuestao();
+        
+        if(questao.quantCorretas() < 1){
+            String msg = "Pelo menos uma alternativa deve ser correta.";
+            MessagerJSF.msgError(FacesContext.getCurrentInstance(), error, msg);
+            return;
+        }
         
         String msg = "Questão salva !";
         MessagerJSF.msgInfo(FacesContext.getCurrentInstance(), info, msg);
@@ -82,6 +89,14 @@ public class CriarQuestaoController {
 
     public void setCorreta(Alternativa correta) {
         this.correta = correta;
+    }
+
+    public UIComponent getError() {
+        return error;
+    }
+
+    public void setError(UIComponent error) {
+        this.error = error;
     }
 
 }
