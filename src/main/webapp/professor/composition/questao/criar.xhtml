@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <b:container fluid="true">
+        <b:form>
+            <b:row>
+                <b:commandButton value="Salvar" look="success" class="float-right"
+                                 action="#{criarQuestaoController.salvar()}" />
+                <h4>Nova Questão:</h4>
+            </b:row>
+            
+            <b:row>
+                <!-- tipo -->
+                <b:selectOneMenu value="#{criarQuestaoController.questao.tipo}"
+                                 converter="converter.tipoquestao">
+                    <f:selectItems value="#{criarQuestaoController.getTipos()}"
+                                   var="tipo" itemValue="#{tipo}"/>
+                </b:selectOneMenu>
+
+                <!-- enunciado -->
+                <b:inputTextarea label="Enunciado" id="enunciado" rows="3"
+                                 required="true"
+                                 requiredMessage="Enunciado deve conter no mínimo 5 caracteres."
+                                 value="#{criarQuestaoController.questao.enunciado}" >
+                    <f:validateLength minimum="5" />
+                </b:inputTextarea>
+                <b:message for="enunciado" />
+
+                <!-- alternativas -->
+                <table class="vertical-center">
+                    <ui:repeat value="#{criarQuestaoController.questao.alternativas}"
+                               var="alternativa">
+                        <tr>
+                            <td style="max-width: 20px;">
+                                <b:selectBooleanCheckbox value="#{alternativa.correta}"/>
+                            </td>
+
+                            <td style="width: 100%; padding-left: 20px;">
+                                <b:inputText value="#{alternativa.texto}"
+                                             required="true"
+                                             requiredMessage="Informe o texo da alternativa ou remova clicando no X." />
+                                <b:message for="@previous" />
+                            </td>
+
+                            <td style="padding-left: 20px;">
+                                <b:commandButton value="X" look="danger" size="sm"
+                                                 immediate="true"
+                                                 action="#{criarQuestaoController
+                                                           .removerAlternativa(alternativa)}"
+                                                 />
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+
+                <h:outputText id="error" binding="#{criarQuestaoController.error}" />
+                <b:message for="error" span="10"/>
+                
+                <h:outputText id="info" binding="#{criarQuestaoController.info}" />
+                <b:message for="info" span="10"/>
+
+                <b:commandButton value="Adicionar alternativa" class="float-right"
+                                 immediate="true"
+                                 action="#{criarQuestaoController.novaAlternativa()}"/>
+
+            </b:row>
+        </b:form>
+    </b:container>
+</ui:composition>

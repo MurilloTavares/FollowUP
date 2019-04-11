@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 @Table(
     uniqueConstraints = @UniqueConstraint(columnNames = {"listaDeQuestao", "aluno"})
 ) 
-class ListaRespondida implements Serializable{
+public class ListaRespondida implements Serializable{
     @Id
     private int id;
     

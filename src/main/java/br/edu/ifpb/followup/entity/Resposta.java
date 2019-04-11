@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-class Resposta implements Serializable {
+public class Resposta implements Serializable {
 
     @EmbeddedId
     private RespostaPK pk;
