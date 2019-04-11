@@ -4,10 +4,10 @@
 
     <groupId>br.edu.ifpb</groupId>
     <artifactId>followUP</artifactId>
-    <version>0.1</version>
+    <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>followUP</name>
+    <name>FollowUP</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -63,9 +63,21 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
+            <version>1.4.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1212.jre7</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <finalName>FollowUP</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
